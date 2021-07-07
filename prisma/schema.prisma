@@ -8,32 +8,24 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email        String        @unique
-  stripeId     String        @unique
-  createdAt    DateTime      @default(now())
-  isSubscribed  Boolean     @default(false)
-  courses      Course[]
+  id             Int      @id @default(autoincrement())
+  email          String   @unique
+  email_verified Boolean?
+  createdAt      DateTime @default(now())
+  hasCakery      Boolean  @default(false)
+  cakery         Cakery?
+  proAccount     Boolean  @default(false)
+  picture        String?
 }
 
-model Course {
-  id        Int      @id @default(autoincrement())
-  title     String   @unique
-  description     String
-  createdAt DateTime @default(now())
-  lessons   Lesson[]
-  users     User[]
-  price     Int
-  slug      String  @unique
-}
-
-model Lesson {
-  id        Int      @id @default(autoincrement())
-  title     String   @unique
-  description     String
-  courseId  Int
-  createdAt DateTime @default(now())
-  course    Course   @relation(fields: [courseId], references: [id])
-  videoUrl  String
-  slug      String  @unique
+model Cakery {
+  id           Int      @id @default(autoincrement())
+  name         String   @unique
+  description  String
+  ownerId      Int
+  updateAt     DateTime @default(now())
+  images       String[]
+  profileImage String?
+  owner        User     @relation(fields: [ownerId], references: [id])
+  slug         String   @unique
 }

@@ -1,3 +1,4 @@
+import React from 'react'
 import { useUser } from '@auth0/nextjs-auth0'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -7,11 +8,6 @@ const menuItems = [
     title: 'Dashboard',
     slug: '/dashboard',
     requiresAuth: true,
-  },
-  {
-    title: 'Pricing',
-    slug: '/pricing',
-    requiresAuth: false,
   },
 ]
 
@@ -27,7 +23,7 @@ const Nav = () => {
         }`}
       >
         <Link href="/">
-          <a>Courses</a>
+          <a>Napa</a>
         </Link>
       </h1>
       <div className="flex-1 flex ml-8 text-xl font-light">

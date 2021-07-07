@@ -1,15 +1,12 @@
 import { createUser } from 'utils/db'
-import { createCustomer } from 'utils/stripe'
 
 module.exports = async (req, res) => {
-  const { email, secret } = JSON.parse(req.body)
-
+  const { email, secret, picture, email_verified } = JSON.parse(req.body)
+  console.log({ email, picture, email_verified })
   if (secret === process.env.AUTH0_HOOK_SECRET) {
     try {
       console.log('creating user')
-      const customer = await createCustomer(email)
-      await createUser(email, customer.id)
-      console.log(`created user (${email}) with Stripe ID(${customer.id})`)
+      await createUser({ email, picture, email_verified })
       res.send({ received: true })
     } catch (err) {
       console.log(err)
