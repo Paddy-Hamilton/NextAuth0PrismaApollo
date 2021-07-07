@@ -1,7 +1,7 @@
 {
-  "name": "courses",
+  "name": "NAPA",
   "version": "1.0.0",
-  "description": "A video tutorial platform for beginner software developers",
+  "description": "Project boilerplate using NextJs, Auth0, Prisma and Apollo",
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dijonmusters/courses.git"
+    "url": "git+https://github.com/Paddy-Hamilton/NextAuth0PrismaApollo.git"
   },
   "author": "Jon Meyers",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dijonmusters/courses/issues"
+    "url": "https://github.com/Paddy-Hamilton/NextAuth0PrismaApollo/issues"
   },
-  "homepage": "https://github.com/dijonmusters/courses#readme",
+  "homepage": "https://github.com/Paddy-Hamilton/NextAuth0PrismaApollo#readme",
   "dependencies": {
     "@auth0/nextjs-auth0": "^1.2.0",
     "@prisma/client": "^2.18.0",
