@@ -1,4 +1,4 @@
-### Project boilerplate using NextJs, Auth0, Prisma, Apollo & Typescript
+### Project boilerplate using NextJs, Auth0, Prisma, Apollo, Typescript & Tailwind
 
 Inspired By [https://github.com/dijonmusters/courses](https://github.com/dijonmusters/courses)
 
@@ -21,7 +21,7 @@ AUTH0_CLIENT_SECRET=''
 
 ### Step 1 - Auth0
 
-1. Creat an Auth0 tenant
+1. Signup to Auth0 and creat an Auth0 tenant
 2. Create the Auth0 app and update the appropriate `.env` variables
 3. Create the Auth0 api
 4. Create permissions for the api e.g. `read:user`, `edit:user` and create roles `admin` and `user` and assigne them appropriate permissions
@@ -31,19 +31,18 @@ AUTH0_CLIENT_SECRET=''
 
 **Rule One - Set roles to a user**
 
-```
+```js
 function setRolesToUser(user, context, callback) {
-
   // Roles should only be set to verified users.
   if (!user.email) {
-    return callback(null, user, context);
+    return callback(null, user, context)
   }
 
-  user.app_metadata = user.app_metadata || {};
+  user.app_metadata = user.app_metadata || {}
   // You can add a Role based on what you want
   // In this case I check domain
   const addRolesToUser = function (user) {
-    const endsWith = 'yourAdminUser@email.com';
+    const endsWith = 'yourAdminUser@email.com'
 
     if (
       user.email &&
@@ -52,23 +51,23 @@ function setRolesToUser(user, context, callback) {
         user.email.length
       ) === endsWith
     ) {
-      return ['admin'];
+      return ['admin']
     }
-    return ['user'];
-  };
+    return ['user']
+  }
 
-  const roles = addRolesToUser(user);
+  const roles = addRolesToUser(user)
 
-  user.app_metadata.roles = roles;
+  user.app_metadata.roles = roles
   auth0.users
     .updateAppMetadata(user.user_id, user.app_metadata)
     .then(function () {
-      context.idToken['https://APP_DOMAIN/roles'] = user.app_metadata.roles;
-      callback(null, user, context);
+      context.idToken['https://APP_DOMAIN/roles'] = user.app_metadata.roles
+      callback(null, user, context)
     })
     .catch(function (err) {
-      callback(err);
-    });
+      callback(err)
+    })
 }
 ```
 
@@ -76,7 +75,7 @@ function setRolesToUser(user, context, callback) {
 
 the `URL_OF_API` of `localhost` wont work, so when developing locally you will need to use **Ngrok**. Install it with `npm i -g ngrok` and then run it `ngrok http 3000` or whatever your localhost port is running on. That should give you a url to use when developing locally, but the `URL_OF_API` below will need to be set to the production endpoint when
 
-```
+```js
 async function (user, context, callback) {
   user.app_metadata = user.app_metadata || {};
 
